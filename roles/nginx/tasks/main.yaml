@@ -1,0 +1,3 @@
+- name: Install nginx  (state=present is optional)
+  ansible.builtin.apt:
+    name: nginx-core
