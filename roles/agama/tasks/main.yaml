@@ -7,13 +7,21 @@
     path: /opt/agama
     owner: agama
     state: directory
+    mode: 0755
 
 - name: Download 'Flask-sqlalchemy'
   ansible.builtin.apt:
     name: python3-flask-sqlalchemy
+    update_cache: yes
 
 - name: Download 'agama.py' from URL
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
     dest: /opt/agama
-    mode: "0777"
+    mode: 0755
+
+- name: uWSGI service
+  ansible.builtin.service:
+    name: uwsgi
+    state: started
+    enabled: true

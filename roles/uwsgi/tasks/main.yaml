@@ -5,6 +5,7 @@
     - uwsgi-plugin-python3
     - python3-pymysql
 
+
 - name: copy the uwsgi config file
   ansible.builtin.template:
     src: ../templates/agama.ini

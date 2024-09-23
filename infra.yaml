@@ -4,7 +4,7 @@
     roles:
       - init
 
-  - name: web_server
+  - name: web_servers
     hosts: web_servers
     become: yes
     roles:

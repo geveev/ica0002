@@ -1,4 +1,5 @@
-- name: Restart Nginx
+- name: restart uwsgi
   ansible.builtin.service:
     name: uwsgi
     state: restarted
+  become: yes
