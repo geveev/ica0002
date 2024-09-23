@@ -4,8 +4,10 @@
     roles:
       - init
 
-  - name: nginx configuration
-    hosts: all
+  - name: web_server
+    hosts: web_servers
     become: yes
     roles:
+      - agama
+      - uwsgi
       - nginx
