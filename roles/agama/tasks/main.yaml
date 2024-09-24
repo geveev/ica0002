@@ -20,8 +20,3 @@
     dest: /opt/agama
     mode: 0755
 
-- name: uWSGI service
-  ansible.builtin.service:
-    name: uwsgi
-    state: started
-    enabled: true

@@ -5,10 +5,9 @@
     - uwsgi-plugin-python3
     - python3-pymysql
 
-
 - name: copy the uwsgi config file
   ansible.builtin.template:
-    src: ../templates/agama.ini
+    src: ../files/agama.ini
     dest: /etc/uwsgi/apps-enabled/agama.ini
   notify: restart uwsgi
 

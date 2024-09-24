@@ -1,12 +1,7 @@
-- name: Install nginx and is working  (state=present is optional)
+- name: Install or check if nginx exist
   ansible.builtin.apt:
     name: nginx-core
-
-- name: nginx service
-  ansible.builtin.service:
-    name: nginx
-    state: started
-    enabled: true
+  notify: start nginx
 
 - name: copy the nginx config file and restart nginx
   ansible.builtin.copy:
@@ -15,8 +10,3 @@
   become: yes
   notify: restart nginx
 
-- name: nginx service
-  ansible.builtin.service:
-    name: nginx
-    state: started
-    enabled: true
