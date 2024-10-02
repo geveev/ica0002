@@ -1,4 +1,9 @@
-geveev-1 ansible_host=ubuntu@193.40.156.67 ansible_port=38822 ansible_user=ubuntu
+geveev-1 ansible_host=ubuntu@193.40.156.67 ansible_port=6922 ansible_user=ubuntu
+geveev-2 ansible_host=ubuntu@193.40.156.67 ansible_port=6322 ansible_user=ubuntu
+
+[db_servers]
+geveev-2
 
 [web_servers]
 geveev-1
+

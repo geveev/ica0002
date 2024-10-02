@@ -1,0 +1,34 @@
+- name: Download mysql-server
+  ansible.builtin.apt:
+    name: mysql-server
+    update_cache: yes
+
+- name: Download python-pymysql
+  ansible.builtin.apt:
+    pkg:
+      - python3-pymysql
+
+- name: Start on System boot
+  ansible.builtin.service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: copy the mysql config file and restart mysql server
+  copy:
+    src: ../files/override.cnf
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+  notify: restart mysql
+
+- name: MySQL database
+  community.mysql.mysql_db:
+    name: "{{ mysql_database }}"
+    login_unix_socket: /var/run/mysqld/mysqld.sock
+
+- name: MySQL user
+  community.mysql.mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    host: "%"
+    priv: "{{ mysql_database }}.*:ALL"
+    login_unix_socket: /var/run/mysqld/mysqld.sock

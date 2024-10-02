@@ -1,12 +1,14 @@
-- name: Install or check if nginx exist
+- name: Install nginx  (state=present is optional)
   ansible.builtin.apt:
     name: nginx-core
-  notify: start nginx
+
+- name: start nginx
+  ansible.builtin.service:
+    name: nginx
+    state: started
 
 - name: copy the nginx config file and restart nginx
-  ansible.builtin.copy:
-    src: ../files/default
-    dest: /etc/nginx/sites-available/default
-  become: yes
-  notify: restart nginx
-
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+  
