@@ -1,6 +1,7 @@
 - name: Create a user 'agama'
   ansible.builtin.user:
     name: agama
+    system: yes
 
 - name: Create a directory '/opt/agama'
   ansible.builtin.file:
@@ -13,13 +14,13 @@
   ansible.builtin.apt:
     name: python3-flask-sqlalchemy
 
-- name: Download PyMySQL
+- name: Download pymysql
   ansible.builtin.apt:
     name: python3-pymysql
 
 - name: Download 'agama.py' from URL
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/hudolejev/agama/master/agama.py
-    dest: /opt/agama
-    mode: 0755
-
+    dest: '/opt/agama/agama.py'
+    owner: agama
+    mode: 0644

@@ -5,15 +5,17 @@
     - uwsgi-plugin-python3
     - python3-pymysql
 
+- name: copy the uwsgi config file
+  ansible.builtin.template:
+    src: 'agama.ini.j2'
+    dest: /etc/uwsgi/apps-enabled/agama.ini
+    owner: agama
+    mode: 0600
+  no_log: true
+  notify: restart uwsgi
+
 - name: start uwsgi
   ansible.builtin.service:
     name: uwsgi
     state: started
     enabled: yes
-
-- name: copy the uwsgi config file
-  ansible.builtin.template:
-    src: ../templates/agama.ini.j2
-    dest: /etc/uwsgi/apps-enabled/agama.ini
-  notify: restart uwsgi
-

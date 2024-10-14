@@ -1,24 +1,27 @@
 - name: Download mysql-server
   ansible.builtin.apt:
     name: mysql-server
-    update_cache: yes
+    state: present
 
 - name: Download python-pymysql
   ansible.builtin.apt:
-    pkg:
-      - python3-pymysql
+    name: python3-pymysql
+    state: present
+
+- name: copy the mysql config file and restart mysql server
+  ansible.builtin.copy:
+    src: ../files/override.cnf
+    dest: /etc/mysql/mysql.conf.d/override.cnf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart mysql
 
 - name: Start on System boot
   ansible.builtin.service:
     name: mysql
     state: started
     enabled: yes
-
-- name: copy the mysql config file and restart mysql server
-  copy:
-    src: ../files/override.cnf
-    dest: /etc/mysql/mysql.conf.d/override.cnf
-  notify: restart mysql
 
 - name: MySQL database
   community.mysql.mysql_db:
