@@ -1,4 +1,4 @@
-mysql_host: 192.168.43.124
+mysql_host: 192.168.42.{{ hostvars['geveev-2']['ansible_default_ipv4']['address'].split('.')[3] }}
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |
@@ -8,3 +8,14 @@ mysql_password: !vault |
           35663361643637356139313537333861366165383932343065613461636462363463613636386662
           3533303165313864340a313633396539383936366361336436373464613033303839333566393934
           3434
+
+
+vm1_ip: 192.168.43.46
+vm2_ip: 192.168.43.109
+domain: minecraft2.ttu
+localhost: 127.0.0.0/8
+local_network: 192.168.42.0/24
+dns_forwarders:
+  - 1.1.1.1
+  - 8.8.8.8
+  - 9.9.9.9

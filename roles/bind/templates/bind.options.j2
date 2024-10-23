@@ -1,0 +1,19 @@
+    acl corpnets {
+	192.168.42.0/23;
+	127.0.0.0/8;
+    };
+
+
+options {
+
+    allow-query {corpnets;};
+    directory "/var/cache/bind";
+
+    forwarders {
+	{% for forwarder in dns_forwarders %}
+		{{ forwarder }};
+	{% endfor %}
+    };
+
+    dnssec-validation no;
+};

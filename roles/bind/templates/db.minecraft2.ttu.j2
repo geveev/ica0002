@@ -1,0 +1,11 @@
+$TTL	604800
+minecraft2.ttu.	IN	SOA	ns.minecraft2.ttu. mail.minecraft2.ttu. (
+			      2		; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+minecraft2.ttu.	IN	NS	geveev-2
+geveev-1	IN	A	{{ hostvars['geveev-1']['ansible_default_ipv4']['address'] }}
+geveev-2	IN	A	{{ hostvars['geveev-2']['ansible_default_ipv4']['address'] }}
