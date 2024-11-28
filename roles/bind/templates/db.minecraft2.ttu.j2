@@ -1,5 +1,5 @@
 $TTL	604800
-{{ domain }}.	IN	SOA	ns.{{ domain }}. mail.{{ domain }}. (
+{{ domain }}.	IN	SOA	geveev-2.{{ domain }}. mail.{{ domain }}. (
 			      2		; Serial
 			 604800		; Refresh
 			  86400		; Retry
@@ -8,5 +8,6 @@ $TTL	604800
 ;
 {{ domain }}.	IN	NS	{{ vm_2 }}
 {% for vm in groups['all'] %}
-{{ vm }}	IN	A	{{ hostvars['{{ vm }}']['ansible_default_ipv4']['address'] }}
+{{ vm }}	IN	A	{{ hostvars[vm]['ansible_default_ipv4']['address'] }}
 {% endfor %}
+

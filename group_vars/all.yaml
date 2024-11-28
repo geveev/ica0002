@@ -1,4 +1,4 @@
-mysql_host: 192.168.42.{{ hostvars['geveev-2']['ansible_default_ipv4']['address'].split('.')[3] }}
+mysql_host: geveev-2
 mysql_database: agama
 mysql_user: agama
 mysql_password: !vault |

@@ -1,0 +1,4 @@
+- name: copy dns resolv to servers
+  ansible.builtin.template:
+    src: templates/resolv.conf.j2
+    dest: /etc/resolv.conf

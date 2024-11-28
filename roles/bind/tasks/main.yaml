@@ -15,12 +15,7 @@
 - name: copy the db.minecraft2.ttu config file
   ansible.builtin.template:
     src: db.{{ domain }}.j2
-    dest: /etc/bind/db.{{ domain }}
-
-- name: copy resolve conf file
-  ansible.builtin.template:
-    src: resolve.conf.j2
-    dest: /etc/bind/resolv.conf
+    dest: /var/cache/bind/db.{{ domain }}
   notify: restart bind
 
 - name: start bind
