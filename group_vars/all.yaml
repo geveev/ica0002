@@ -10,8 +10,8 @@ mysql_password: !vault |
           3434
 
 
-vm1_ip: 192.168.43.46
-vm2_ip: 192.168.43.109
+vm1_ip: 192.168.42.{{ hostvars['geveev-1']['ansible_default_ipv4']['address'].split('.')[3] }}
+vm2_ip: 192.168.43.{{ hostvars['geveev-2']['ansible_default_ipv4']['address'].split('.')[3] }}
 domain: minecraft2.ttu
 localhost: 127.0.0.0/8
 local_network: 192.168.42.0/24
@@ -19,3 +19,5 @@ dns_forwarders:
   - 1.1.1.1
   - 8.8.8.8
   - 9.9.9.9
+vm_1: geveev-1
+vm_2: geveev-2
