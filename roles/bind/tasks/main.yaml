@@ -10,7 +10,7 @@
   loop:
     - options
     - local
-#  notify: restart bind
+  notify: restart bind
 
 - name: copy the db.minecraft2.ttu config file
   ansible.builtin.template:

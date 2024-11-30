@@ -1,3 +1,9 @@
+- name: Stop service systemd-resolved
+  ansible.builtin.service:
+    name: systemd-resolved
+    state: stopped
+    enabled: false
+
 - name: copy dns resolv to servers
   ansible.builtin.template:
     src: templates/resolv.conf.j2
