@@ -1,0 +1,4 @@
+{
+  memory_consumption: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 by (instance),
+  avg_cpu_load: avg(node_load1) by (instance)
+}
