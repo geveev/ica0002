@@ -1,0 +1,9 @@
+- name: Install nginx exporter
+  ansible.builtin.apt:
+    name: prometheus-nginx-exporter
+
+- name: nginx exporter started
+  ansible.builtin.service:
+    name: prometheus-nginx-exporter
+    enabled: true
+    state: started
