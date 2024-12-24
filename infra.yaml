@@ -33,7 +33,7 @@
       - nginx
       - nginx_exporter
 
-  - name: Grafaba
+  - name: Grafana
     hosts: grafana
     become: yes
     roles:

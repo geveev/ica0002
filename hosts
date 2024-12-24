@@ -1,5 +1,5 @@
-geveev-1 ansible_host=ubuntu@193.40.156.67 ansible_port=28722 ansible_user=ubuntu
-geveev-2 ansible_host=ubuntu@193.40.156.67 ansible_port=36222 ansible_user=ubuntu
+geveev-1 ansible_host=ubuntu@193.40.156.67 ansible_port=29522 ansible_user=ubuntu
+geveev-2 ansible_host=ubuntu@193.40.156.67 ansible_port=39722 ansible_user=ubuntu
 
 [dns_server]
 geveev-2
@@ -14,4 +14,7 @@ geveev-2
 geveev-2
 
 [grafana]
+geveev-2
+
+[influxdb]
 geveev-2

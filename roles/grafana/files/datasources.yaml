@@ -6,6 +6,5 @@ datasources:
     access: proxy
     orgId: 1
     url: "http://geveev-2:9090/prometheus"
-    isDefault: null
-    version: 1
+    isDefault: true
     editable: true

@@ -1,0 +1,7 @@
+- name: InfluxDB dependencies
+  ansible.builtin.apt:
+    pkg:
+    - wget
+    - gnugp
+
+- name:

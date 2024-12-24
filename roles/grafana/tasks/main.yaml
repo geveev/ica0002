@@ -25,7 +25,7 @@
     dest: /etc/grafana/provisioning/datasources
   notify: Restart Grafana
 
-- name: Configure 'main' dashboard
+- name: Configure dashboards
   ansible.builtin.copy:
     src: ../files/dashboard.yaml
     dest: /etc/grafana/provisioning/dashboards
@@ -34,7 +34,7 @@
 - name: send dashboard.json files
   ansible.builtin.copy:
     src: ../files/main.json
-    dest: /var/lib/grafana/dashboards
+    dest: /var/lib/grafana/main.json
   notify: Restart Grafana
 
 - name: Enable and start Grafana service
