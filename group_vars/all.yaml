@@ -32,7 +32,7 @@ vm2_ip: 192.168.43.{{ hostvars['geveev-2']['ansible_default_ipv4']['address'].sp
 
 
 localhost: 127.0.0.0/8
-local_network: 192.168.42.0/24
+local_network: 192.168.42.0/23
 
 domain: minecraft2.ttu
 dns_forwarders:
@@ -42,6 +42,7 @@ dns_forwarders:
 
 agama_port: 5000
 influxdb_port: 8086
+prometheus_port: 9090
 vm_1: geveev-1
 vm_2: geveev-2
 

@@ -19,10 +19,10 @@
     dest: /etc/grafana/grafana.ini
   notify: Restart Grafana
 
-- name: Configure default datasource
-  ansible.builtin.copy:
-    src: ../files/datasources.yaml
-    dest: /etc/grafana/provisioning/datasources
+- name: Configure datasources
+  ansible.builtin.template:
+    src: ../templates/datasources.yaml.j2
+    dest: /etc/grafana/provisioning/datasources/datasources.yaml
   notify: Restart Grafana
 
 - name: Configure dashboards
