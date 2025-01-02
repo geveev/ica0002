@@ -1,0 +1,43 @@
+- name: Ensure fping is installed on Debian/Ubuntu
+  apt:
+    name: fping
+
+- name: create user "agama-client"
+  ansible.builtin.user:
+    name: agama-client
+
+- name: agama-client bash script
+  ansible.builtin.copy:
+    src: ../files/agama-client
+    dest: /usr/local/bin/agama-client
+
+- name: systemd service unit file for agama-client
+  ansible.builtin.template:
+    src: ../templates/agama-client.service.j2
+    dest: /etc/systemd/system/agama-client.service
+
+- name: Reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: yes
+
+- name: Grant permissions
+  ansible.builtin.file:
+    path: /usr/local/bin/agama-client
+    owner: agama-client
+    mode: "0700"
+
+- name: create agama config directory
+  ansible.builtin.file:
+    state: directory
+    path: /etc/agama-client
+
+- name: config for agama-client script
+  ansible.builtin.template:
+    src: ../templates/agama-client.conf.j2
+    dest: /etc/agama-client/agama-client.conf
+
+- name: start and enable agama-client service
+  ansible.builtin.service:
+    name: agama-client
+    state: started
+    enabled: yes

@@ -41,6 +41,7 @@ dns_forwarders:
   - 9.9.9.9
 
 agama_port: 5000
+influxdb_port: 8086
 vm_1: geveev-1
 vm_2: geveev-2
 

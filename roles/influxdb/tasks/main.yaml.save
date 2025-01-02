@@ -1,0 +1,40 @@
+- name: Download the InfluxData archive key
+      ansible.builtin.get_url:
+        url: https://repos.influxdata.com/influxdata-archive_compat.key
+        dest: /tmp/influxdata-archive_compat.key
+        mode: '0644'
+
+  - name: Verify the SHA256 checksum of the key
+    ansible.builtin.shell:
+      cmd: |
+        echo '393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c /tmp/influxdata-archive_compat.key' | sha256sum -c
+    register: sha256sum_check
+    failed_when: "'OK' not in sha256sum_check.stdout"
+
+  - name: Add the key to the trusted GPG directory
+    ansible.builtin.shell:
+      cmd: |
+        cat /tmp/influxdata-archive_compat.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null
+    args:
+      warn: false
+
+  - name: Add the InfluxData repository to sources list
+    ansible.builtin.lineinfile:
+      path: /etc/apt/sources.list.d/influxdata.list
+      line: 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main'
+      create: yes
+
+  - name: Update apt cache
+    ansible.builtin.apt:
+      update_cache: yes
+
+  - name: Install InfluxDB
+    ansible.builtin.apt:
+      name: influxdb
+      state: present
+
+  - name: Start and enable InfluxDB service
+    ansible.builtin.systemd:
+      name: influxdb
+      state: started
+      enabled: yes

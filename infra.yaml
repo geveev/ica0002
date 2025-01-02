@@ -46,6 +46,18 @@
       - mysql
       - mysql_exporter
 
+  - name: Influxdb
+    hosts: influxdb
+    become: yes
+    roles:
+      - influxdb
+
+  - name: Agama_client
+    hosts: agama_client
+    become: yes
+    roles:
+      - agama_client
+
   - name: Web server
     hosts: web_servers
     become: yes
