@@ -33,8 +33,11 @@
 
 - name: send dashboard.json files
   ansible.builtin.copy:
-    src: ../files/main.json
-    dest: /var/lib/grafana/main.json
+    src: ../files/{{ item }}.json
+    dest: /var/lib/grafana/{{ item }}.json
+  loop:
+    - main
+    - rsyslog
   notify: Restart Grafana
 
 - name: Enable and start Grafana service

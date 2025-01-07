@@ -8,3 +8,10 @@ providers:
     type: file
     options:
       path: /var/lib/grafana/main.json
+
+  - name: "rsyslog"
+    folder: ""
+    folderUid: ""
+    type: file
+    options:
+      path: /var/lib/grafana/rsyslog.json

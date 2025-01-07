@@ -3,7 +3,7 @@
       url: https://repos.influxdata.com/influxdata-archive_compat.key
       keyring: /etc/apt/keyrings/influxdb.gpg
 
-  - name: Influxdb APT repos
+  - name: Influxdb APT repository
     ansible.builtin.apt_repository:
       repo: "deb [signed-by=/etc/apt/keyrings/influxdb.gpg] https://repos.influxdata.com/debian stable main"
 
@@ -12,8 +12,52 @@
       name: influxdb=1.8.10-1
       allow_downgrade: yes
 
+  - name: InfluxDB conf file
+    ansible.builtin.copy:
+      src: ../files/influxdb.conf
+      dest: /etc/influxdb/influxdb.conf
+    notify: Restart Influxdb
+
   - name: Start and enable InfluxDB service
     ansible.builtin.systemd:
       name: influxdb
+      state: started
+      enabled: yes
+
+  - name: Download Telegraf
+    ansible.builtin.apt:
+      name: telegraf=1.33.0-1
+
+  - name: Configure Telegraf
+    ansible.builtin.template:
+      src: telegraf.conf.j2
+      dest: /etc/telegraf/telegraf.conf
+
+  - name: Start service telegraf, if not started
+    ansible.builtin.service:
+      name: telegraf
+      state: started
+      enabled: yes
+
+
+  - name: Download InfluxDB Stats Exporter
+    ansible.builtin.get_url:
+      url: "https://github.com/carlpett/influxdb_stats_exporter/releases/download/v0.1.1/influx_stats_exporter_linux_amd64"
+      dest: /usr/local/bin/prometheus-influxdb-exporter
+      mode: '0755'
+
+  - name: Create systemd service for InfluxDB Stats Exporter
+    ansible.builtin.template:
+      src: influxdb_stats_exporter.service.j2
+      dest: /etc/systemd/system/prometheus-influxdb-stats-exporter.service
+      mode: '0644'
+
+  - name: Reload systemd to recognize new service
+    ansible.builtin.systemd:
+      daemon_reload: yes
+
+  - name: Start and enable InfluxDB Stats Exporter
+    ansible.builtin.systemd:
+      name: prometheus-influxdb-stats-exporter
       state: started
       enabled: yes

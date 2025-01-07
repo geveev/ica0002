@@ -22,3 +22,14 @@ datasources:
       database: agama_database
       httpMode: GET
 {% endfor %}
+{% for host in groups['agama_client'] %}
+  - name: Telegraf-InfluxDB
+    type: influxdb
+    access: proxy
+    url: "http://{{ host }}:{{ influxdb_port }}"
+    database: telegraf
+    IsDefault: true
+    uid: "influxdb_telegraf"
+    jsonData:
+      httpMode: POST
+{% endfor %}
