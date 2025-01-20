@@ -4,7 +4,7 @@
 
 - name: Configure MySQL exporter
   ansible.builtin.template:
-    src: my.cnf.j2
+    src: my.prometheus.cnf.j2
     dest: /var/lib/prometheus/.my.cnf
   no_log: true
   notify: restart mysql exporter

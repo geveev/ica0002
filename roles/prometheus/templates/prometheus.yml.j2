@@ -45,3 +45,8 @@ scrape_configs:
 {% for vm in groups['influxdb'] %}
         - '{{ vm }}:9424'
 {% endfor %}
+
+  - job_name: backup
+    static_configs:
+      - targets:
+        - 'backup.minecraft2.ttu:9111'

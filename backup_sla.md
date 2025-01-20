@@ -10,15 +10,12 @@ We back up services that satisfy at least one of these criteria:
 Services that are backed up:
  - MySQL
  - InfluxDB
- - Ansible Git Repository
 
 ## Schedule
 
 MySQL backups are created every _____; it takes up to _____ to create and store the backup.
 
 InfluxDB backups are created every _____; it takes up to _____ to create and store the backup.
-
-Ansible Git Repository backups are created every _____; it takes up to _____ to create and store the backup.
 
 All backups are started automatically by _____.
 
@@ -39,7 +36,7 @@ Backup data from both servers will be synchronized to encrypted AWS S3 bucket in
 
 ## Retention
 
-_____ backups are stored for _____; _____ versions (recovery points) are available to restore.
+_____ backups are stored for 30 days; _____ versions (recovery points) are available to restore.
 
 _____ backups are stored for _____; _____ versions are available to restore.
 

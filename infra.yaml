@@ -44,7 +44,6 @@
     become: yes
     roles:
       - mysql
-      - mysql_exporter
 
   - name: Influxdb
     hosts: influxdb
